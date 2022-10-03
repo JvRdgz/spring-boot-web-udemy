@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.tyhmeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Enviar parámetros del Request HTTP GET - URL</title>
+</head>
+<body>
+	<h1>Enviar parámetros del Request HTTP GET - URL</h1>
+	<ul>
+		<li><a th:href="@{/params/string(text='Hola Javi')}">/params/string?text=Hola
+				Javi</a></li>
+		<!-- Para agregar rutas, se utiliza "@" en vez de "$". Para agregar parametros se indica con parentesis y el valor con '' -->
+		<li><a th:href="@{/params/string(text='Que tal John!')}">/params/string?text=Que
+				tal John!</a></li>
+		<li><a
+			th:href="@{/params/mix-params(saludo='Que tal estás Javi', numero=7)}">/params/mix-params?saludo=Que
+				tal estás Javi&numero=7</a></li>
+		<!-- Los numericos no se introducen entre comillas. -->
+		<li><a
+			th:href="@{/params/mix-params-request(saludo='Que tal estás Javi', numero=7)}">/params/mix-params-request?saludo=Que
+				tal estás Javi&numero=7</a></li>
+	</ul>
+</body>
+</html>

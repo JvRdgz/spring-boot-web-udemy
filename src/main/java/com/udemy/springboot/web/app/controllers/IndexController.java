@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.udemy.springboot.web.app.models.Usuario;
@@ -56,15 +57,29 @@ public class IndexController {
 
 	@RequestMapping("/listar")
 	public String listar(Model model) {
-		List<Usuario> usuarios = Arrays.asList(new Usuario("Andres", "Perez", "andres.perez@gmail.com"),
-				new Usuario("John", "Doe", "john.doe@gmail.com"),
-				new Usuario("Francisco", "Franco", "francisco.franco@gmail.com"),
-				new Usuario("Joe", "Biden", "Joe.biden@gmail.com")); // Añadir elementos a una lista separado por comas
+//		List<Usuario> usuarios = Arrays.asList(new Usuario("Andres", "Perez", "andres.perez@gmail.com"),
+//				new Usuario("John", "Doe", "john.doe@gmail.com"),
+//				new Usuario("Francisco", "Franco", "francisco.franco@gmail.com"),
+//				new Usuario("Joe", "Biden", "Joe.biden@gmail.com")); // Añadir elementos a una lista separado por comas
 //		usuarios.add(new Usuario("Andres", "Perez", "andres.perez@gmail.com"));
 //		usuarios.add(new Usuario("John", "Doe", "john.doe@gmail.com"));
 //		usuarios.add(new Usuario("Francisco", "Franco", "francisco.franco@gmail.com"));
 		model.addAttribute("titulo", "Listado de usuarios");
-		model.addAttribute("usuarios", usuarios);
+		// model.addAttribute("usuarios", usuarios);
 		return "listar";
+	}
+	
+	/**
+	 * Pasar datos a la vista. En este caso una lista de usuarios. Esto nos sirve por si queremos utilizar un método para varias
+	 * vistas.
+	 * @return los usuarios, que se pasarán a la vista.
+	 */
+	@ModelAttribute("usuarios") // tenemos que añadir el nombre con el que queremos guardar en la vista por parametro de la anotación
+	public List<Usuario> poblarUsuarios() {
+		List<Usuario> usuarios = Arrays.asList(new Usuario("Andres", "Perez", "andres.perez@gmail.com"),
+				new Usuario("John", "Doe", "john.doe@gmail.com"),
+				new Usuario("Francisco", "Franco", "francisco.franco@gmail.com"),
+				new Usuario("Joe", "Biden", "Joe.biden@gmail.com"));
+		return usuarios;
 	}
 }
