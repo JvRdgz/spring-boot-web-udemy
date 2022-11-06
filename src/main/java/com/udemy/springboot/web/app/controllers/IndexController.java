@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -20,6 +21,16 @@ public class IndexController {
 // Manejo de handlers => Manejo de peticiones de un usuario (borrar, modificar, insertar...)
 // El Controller se encarga de manejar las peticiones del usuario.
 // Siempre son métodos públicos
+	
+	// Inyectar valores usando la anotación @Value
+	@Value("${text.indexcontroller.index.titulo}")
+	private String textoIndex;
+	
+	@Value("${text.indexcontroller.perfil.titulo}")
+	private String textoPerfil;
+	
+	@Value("${text.indexcontroller.listar.titulo}")
+	private String textoListar;
 
 	// @RequestMapping(value="/index", method=RequestMethod.GET) // Relaciona este
 	// metodo con una ruta URL (Mapping). Si se omite el method, cogerá por defecto
@@ -30,7 +41,9 @@ public class IndexController {
 	// public String index(Model model) { // Model sirve para pasar datos a la
 	// interfaz
 	public String index(ModelMap model) { // ModelMap funciona igual que Model.
-		model.addAttribute("titulo", "Hola Spring framework!!");
+		// model.addAttribute("titulo", "Hola Spring framework!!");
+		// Con @Value hacemos referencia al valore del .properties:
+		model.addAttribute("titulo", textoIndex);
 		return "index"; // Devuelve la plantilla index, que la buscara en el paquete resources.templates
 	}
 
@@ -51,7 +64,8 @@ public class IndexController {
 		usuario.setApellido("Pérez");
 		usuario.setEmail("andres.perez@gmail.com");
 		model.addAttribute("usuario", usuario);
-		model.addAttribute("titulo", "Perfil del usuario: " + usuario.getNombre() + " " + usuario.getApellido());
+		// model.addAttribute("titulo", "Perfil del usuario: " + usuario.getNombre() + " " + usuario.getApellido());
+		model.addAttribute("titulo", textoPerfil.concat(usuario.getNombre() + " " + usuario.getApellido()));
 		return "perfil";
 	}
 
@@ -64,7 +78,7 @@ public class IndexController {
 //		usuarios.add(new Usuario("Andres", "Perez", "andres.perez@gmail.com"));
 //		usuarios.add(new Usuario("John", "Doe", "john.doe@gmail.com"));
 //		usuarios.add(new Usuario("Francisco", "Franco", "francisco.franco@gmail.com"));
-		model.addAttribute("titulo", "Listado de usuarios");
+		model.addAttribute("titulo", textoListar);
 		// model.addAttribute("usuarios", usuarios);
 		return "listar";
 	}
