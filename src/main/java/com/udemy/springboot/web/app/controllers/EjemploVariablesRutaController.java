@@ -18,7 +18,7 @@ public class EjemploVariablesRutaController {
 	
 	/**
 	 * Metodo PathVariable.
-	 * El nombre del parametro tiene que ser igual que el nombre indicado entre {} del metodo Handler (GetMapping)
+	 * El nombre del parametro tiene que ser igual que el nombre indado entre {} del metodo Handler (GetMapping)
 	 * @param texto
 	 * @return
 	 */
